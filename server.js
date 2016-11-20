@@ -4,8 +4,17 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
+var LINEBot = require('line-messaging');
 
+// port number
 var port = process.env.PORT || 3000;
+
+// LINE bot instance
+var bot = LINEBot.create({
+  channelID: '1489062968',
+  channelSecret: '71e1c7bf525ace35ac89c39c45d11d7f',
+  channelToken: 'oAMtDVspf6zqGXP+4kP9max88/w/wsnOyoecOXRNPb2YxWYt+ko0gN3JbcqdX+OhDzajL/l7Qie8+eU3zcqO31cxNePOhjiUHDCT3EIgP6I/9ef4LnONPzVe6mOyHF5gWZ89CagcF9PFfir1L4RMIgdB04t89/1O/w1cDnyilFU='
+}, http);
 
 // parse application/x-www-form-urlencoded 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,6 +34,13 @@ app.get('/', function(req, res){
 // A test view to send answers
 app.get('/message', function(req, res){
 	res.sendFile('message.html', options);
+});
+
+app.use(bot.webhook('/message'));
+
+bot.on(LINEBot.Events.MESSAGE, function(replyToken, message) {
+  // add code below. 
+  io.emit('chat message', message);
 });
 
 // A router to send answers by json post
