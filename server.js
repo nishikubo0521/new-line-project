@@ -22,6 +22,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json 
 app.use(bodyParser.json());
 
+// parse bot message
+app.use(bot.webhook('/message'));
+
+// Message event
+bot.on(LINEBot.Events.MESSAGE, function(replyToken, message) {
+  // add code below. 
+  io.emit('chat message', "message");
+});
+
 var options = {
   root: __dirname,
 };
@@ -34,13 +43,6 @@ app.get('/', function(req, res){
 // A test view to send answers
 app.get('/message', function(req, res){
 	res.sendFile('message.html', options);
-});
-
-app.use(bot.webhook('/message'));
-
-bot.on(LINEBot.Events.MESSAGE, function(replyToken, message) {
-  // add code below. 
-  io.emit('chat message', "message");
 });
 
 // A router to send answers by json post
