@@ -16,26 +16,24 @@ var bot = LINEBot.create({
   channelToken: 'oAMtDVspf6zqGXP+4kP9max88/w/wsnOyoecOXRNPb2YxWYt+ko0gN3JbcqdX+OhDzajL/l7Qie8+eU3zcqO31cxNePOhjiUHDCT3EIgP6I/9ef4LnONPzVe6mOyHF5gWZ89CagcF9PFfir1L4RMIgdB04t89/1O/w1cDnyilFU='
 }, http);
 
-// parse application/x-www-form-urlencoded 
-app.use(bodyParser.urlencoded({ extended: false }));
- 
-// parse application/json 
-app.use(bodyParser.json());
-
 // parse bot message
 app.use(bot.webhook('/message'));
 
 // Message event
-app.post('/message', function(req, res){
-	bot.on(LINEBot.Events.MESSAGE, function(replyToken, message) {
-	  // add code below. 
-	  io.emit('chat message', "message");
-	});
+bot.on(LINEBot.Events.MESSAGE, function(replyToken, message) {
+  // add code below. 
+  io.emit('chat message', "message");
 });
 
 var options = {
   root: __dirname,
 };
+
+// parse application/x-www-form-urlencoded 
+app.use(bodyParser.urlencoded({ extended: false }));
+ 
+// parse application/json 
+app.use(bodyParser.json());
 
 // A view for all answers
 app.get('/', function(req, res){
