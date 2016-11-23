@@ -26,9 +26,11 @@ app.use(bodyParser.json());
 app.use(bot.webhook('/message'));
 
 // Message event
-bot.on(LINEBot.Events.MESSAGE, function(replyToken, message) {
-  // add code below. 
-  io.emit('chat message', "message");
+app.post('/message', function(req, res){
+	bot.on(LINEBot.Events.MESSAGE, function(replyToken, message) {
+	  // add code below. 
+	  io.emit('chat message', "message");
+	});
 });
 
 var options = {
