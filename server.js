@@ -15,7 +15,7 @@ var bot = LINEBot.create({
   channelID: '1489062968',
   channelSecret: '71e1c7bf525ace35ac89c39c45d11d7f',
   channelToken: 'oAMtDVspf6zqGXP+4kP9max88/w/wsnOyoecOXRNPb2YxWYt+ko0gN3JbcqdX+OhDzajL/l7Qie8+eU3zcqO31cxNePOhjiUHDCT3EIgP6I/9ef4LnONPzVe6mOyHF5gWZ89CagcF9PFfir1L4RMIgdB04t89/1O/w1cDnyilFU='
-}, https);
+}, http);
 
 // parse bot message
 app.use(bot.webhook('/message'));
@@ -47,10 +47,10 @@ app.get('/', function(req, res){
 // });
 
 // A router to send answers by json post
-// app.post('/message', function(req, res){
-// 	console.log(req.body);
-//   io.emit('chat message', req.body.message);
-// });
+app.post('/message', function(req, res){
+	console.log(req.body);
+  io.emit('chat message', 'normal post comming!');
+});
 
 // socket.io to connect this server with answer view
 io.on('connection', function(socket){
@@ -60,6 +60,6 @@ io.on('connection', function(socket){
   });
 });
 
-https.listen(port, function(){
+http.listen(port, function(){
 	console.log('listening to port:' + port);
 });
