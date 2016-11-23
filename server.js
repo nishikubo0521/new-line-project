@@ -49,7 +49,7 @@ app.get('/', function(req, res){
 // A router to send answers by json post
 app.post('/message', function(req, res){
 	// console.log(req.body);
-  io.emit('chat message', 'normal post comming!');
+  io.emit('chat message', 'LINEからなんかきた！');
 	res.status(200).end();
 });
 
