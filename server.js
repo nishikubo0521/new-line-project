@@ -46,10 +46,10 @@ app.get('/message', function(req, res){
 });
 
 // A router to send answers by json post
-app.post('/message', function(req, res){
-	console.log(req.body);
-  io.emit('chat message', req.body.message);
-});
+// app.post('/message', function(req, res){
+// 	console.log(req.body);
+//   io.emit('chat message', req.body.message);
+// });
 
 // socket.io to connect this server with answer view
 io.on('connection', function(socket){
