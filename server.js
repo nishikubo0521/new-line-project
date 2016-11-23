@@ -50,6 +50,7 @@ app.get('/', function(req, res){
 app.post('/message', function(req, res){
 	// console.log(req.body);
   io.emit('chat message', 'normal post comming!');
+	res.status(200).end();
 });
 
 // socket.io to connect this server with answer view
