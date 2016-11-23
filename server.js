@@ -41,9 +41,9 @@ app.get('/', function(req, res){
 });
 
 // A test view to send answers
-app.get('/message', function(req, res){
-	res.sendFile('message.html', options);
-});
+// app.get('/message', function(req, res){
+// 	res.sendFile('message.html', options);
+// });
 
 // A router to send answers by json post
 // app.post('/message', function(req, res){
