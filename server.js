@@ -56,7 +56,7 @@ app.post('/message', function(req, res){
 		// ユーザー情報を取得する。
 		request.get(options, function(error, response, body){
 			if (!error && response.statusCode == 200) {
-				io.emit('chat message', body['displayName']);
+				io.emit('chat message', body['displayName'] + ': ' + req.body['events'][0]['message']['text']);
 				res.status(200).end();
 			}
 		});
