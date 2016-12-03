@@ -44,9 +44,6 @@ app.post('/message', function(req, res){
 			return;
 		}
 
-		io.emit('chat message', 'textあるよ！');
-		return;
-
 		// テキスト送信元のユーザーIDを取得する。
 		var userId = req.body['events'][0]['source']['userId'];
 
@@ -64,8 +61,13 @@ app.post('/message', function(req, res){
 			if (!error && response.statusCode == 200) {
 				io.emit('chat message', body['displayName'] + ': ' + req.body['events'][0]['message']['text']);
 				res.status(200).end();
+			}else {
+				io.emit('chat message', 'なんか失敗したよ');
+				res.status(200).end();
 			}
 		});
+
+		return;
 
 });
 
