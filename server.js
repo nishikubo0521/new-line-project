@@ -48,7 +48,7 @@ app.post('/message', function(req, res){
 
 		var options = {
 		  url: 'https://api.line.me/v2/bot/profile/' + userId,
-		  proxy: process.env.FIXIE_URL,
+		  // proxy: process.env.FIXIE_URL,
       json: true,
 		  headers: {
 		    'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS_TOKEN + '}'
