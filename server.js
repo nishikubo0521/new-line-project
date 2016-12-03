@@ -63,6 +63,7 @@ app.post('/message', function(req, res){
 				res.status(200).end();
 			}else {
 				io.emit('chat message', 'エラー: ' + response.statusCode);
+				io.emit('chat message', 'エラー: ' + response.statusMessage);
 				res.status(200).end();
 			}
 		});
