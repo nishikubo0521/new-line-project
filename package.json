@@ -1,5 +1,5 @@
 {
-  "name": "zenken-quiz",
+  "name": "new-line-project",
   "version": "1.0.0",
   "description": "An application used for a party held at the end of the year",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nishikubo0521/zenken-quiz.git"
+    "url": "git+https://github.com/nishikubo0521/new-line-project.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nishikubo0521/zenken-quiz/issues"
+    "url": "https://github.com/nishikubo0521/new-line-project/issues"
   },
-  "homepage": "https://github.com/nishikubo0521/zenken-quiz#readme",
+  "homepage": "https://github.com/nishikubo0521/new-line-project#readme",
   "dependencies": {
     "async": "^2.1.4",
     "body-parser": "^1.15.2",
