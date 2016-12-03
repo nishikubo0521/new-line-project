@@ -29,8 +29,8 @@ app.get('/', function(req, res){
 // A router to send answers by json post
 app.post('/message', function(req, res){
 
-		io.emit('chat message', 'LINEじゃないよ！');
-		return;
+		// io.emit('chat message', 'LINEじゃないよ！');
+		// return;
 			
 		// リクエストがLINE Platformから送られてきたか確認する
 		if (!validate_signature(req.headers['x-line-signature'], req.body)) {
