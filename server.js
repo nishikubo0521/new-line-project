@@ -44,6 +44,8 @@ app.post('/message', function(req, res){
 		// テキスト送信元のユーザーIDを取得する。
 		var userId = req.body['events'][0]['source']['userId'];
 
+		console.log(process.env.FIXIE_URL);
+
 		var options = {
 		  url: 'https://api.line.me/v2/bot/profile/' + userId,
 		  proxy: process.env.FIXIE_URL,
