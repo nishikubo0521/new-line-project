@@ -1,6 +1,9 @@
 {
   "name": "new-line-project",
   "version": "1.0.0",
+  "engines": {
+    "node": "7.1.0"
+  },
   "description": "An application used for a party held at the end of the year",
   "main": "index.js",
   "scripts": {
