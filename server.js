@@ -62,7 +62,7 @@ app.post('/message', function(req, res){
 				io.emit('chat message', body['displayName'] + ': ' + req.body['events'][0]['message']['text']);
 				res.status(200).end();
 			}else {
-				io.emit('chat message', 'なんか失敗したよ');
+				io.emit('chat message', 'エラー: ' + response.statusCode);
 				res.status(200).end();
 			}
 		});
