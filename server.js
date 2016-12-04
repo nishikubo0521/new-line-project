@@ -44,11 +44,8 @@ app.post('/message', function(req, res){
 		// テキスト送信元のユーザーIDを取得する。
 		var userId = req.body['events'][0]['source']['userId'];
 
-		// console.log(process.env.QUOTAGUARDSTATIC_URL);
-
 		var options = {
 		  url: 'https://api.line.me/v2/bot/profile/' + userId,
-		  // proxy: process.env.QUOTAGUARDSTATIC_URL,
       json: true,
 		  headers: {
 		    'Authorization': 'Bearer {' + process.env.LINE_CHANNEL_ACCESS_TOKEN + '}'
@@ -59,15 +56,13 @@ app.post('/message', function(req, res){
 		request.get(options, function(error, response, body){
 			if (!error && response.statusCode == 200) {
 				io.emit('chat message', body['displayName'] + ': ' + req.body['events'][0]['message']['text']);
-				res.status(200).end();
 			}else {
 				io.emit('chat message', 'エラー: ' + response.statusCode);
 				io.emit('chat message', 'エラー: ' + response.statusMessage);
-				console.log(JSON.stringify(req.body));
-				console.log(JSON.stringify(response));
-				console.log(JSON.stringify(error));
-				res.status(200).end();
 			}
+			console.log(JSON.stringify(req.body));
+			console.log(JSON.stringify(response));
+			res.status(200).end();
 		});
 
 		return;
