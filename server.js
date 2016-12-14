@@ -33,12 +33,14 @@ app.post('/message', function(req, res){
 		// リクエストがLINE Platformから送られてきたか確認する
 		if (!validate_signature(req.headers['x-line-signature'], req.body)) {
 			io.emit('line error', 'LINEじゃないよ！');
+			console.log('LINEじゃないよ！');
 			return;
 		}
 
 		// テキストが送られてきた場合のみ返事をする
 		if ((req.body['events'][0]['type'] != 'message') || (req.body['events'][0]['message']['type'] != 'text')) {
 			io.emit('line error', 'テキストはないよ！');
+			console.log('テキストはないよ！');
 			return;
 		}
 
@@ -63,6 +65,7 @@ app.post('/message', function(req, res){
 					pictureUrl: body['pictureUrl']
 				};
 				io.emit('line message', data);
+				console.log('なんかはきたよ');
 			}
 			else {
 				io.emit('line error', 'エラー: ' + response.statusCode);
