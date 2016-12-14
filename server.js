@@ -1,3 +1,4 @@
+
 // modules
 var express = require('express');
 var app = express();
@@ -31,13 +32,13 @@ app.post('/message', function(req, res){
 			
 		// リクエストがLINE Platformから送られてきたか確認する
 		if (!validate_signature(req.headers['x-line-signature'], req.body)) {
-			io.emit('chat message', 'LINEじゃないよ！');
+			io.emit('line error', 'LINEじゃないよ！');
 			return;
 		}
 
 		// テキストが送られてきた場合のみ返事をする
 		if ((req.body['events'][0]['type'] != 'message') || (req.body['events'][0]['message']['type'] != 'text')) {
-			io.emit('chat message', 'テキストはないよ！');
+			io.emit('line error', 'テキストはないよ！');
 			return;
 		}
 
@@ -54,14 +55,25 @@ app.post('/message', function(req, res){
 
 		// ユーザー情報を取得する。
 		request.get(options, function(error, response, body){
+
 			if (!error && response.statusCode == 200) {
-				io.emit('chat message', body['displayName'] + ': ' + req.body['events'][0]['message']['text']);
-			}else {
-				io.emit('chat message', 'エラー: ' + response.statusCode);
-				io.emit('chat message', 'エラー: ' + response.statusMessage);
+				data = {
+					displayName : body['displayName'],
+					text: req.body['events'][0]['message']['text'],
+					pictureUrl: body['pictureUrl']
+				};
+				io.emit('line message', data);
 			}
+			else {
+				io.emit('line error', 'エラー: ' + response.statusCode);
+				io.emit('line error', 'エラー: ' + response.statusMessage);
+			}
+
+			// ログ
 			console.log(JSON.stringify(req.body));
 			console.log(JSON.stringify(response));
+
+			// レスポンス
 			res.status(200).end();
 		});
 
@@ -73,7 +85,11 @@ app.post('/message', function(req, res){
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     console.log('message: ' + msg);
-    io.emit('chat message', msg);
+		data = {
+			displayName : 'Unknown',
+			text: msg,
+		};
+    io.emit('chat message', data);
   });
 });
 

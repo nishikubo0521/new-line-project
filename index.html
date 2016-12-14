@@ -1,5 +1,7 @@
 <!doctype html>
 <html>
+
+
 <head>
   <title>Socket.IO chat</title>
   <style>
@@ -13,22 +15,69 @@
     #messages li:nth-child(odd) { background: #eee; }
   </style>
 </head>
+
+
 <body>
-  <ul id="messages"></ul>
+  <ul id="messages">
+    
+  </ul>
   <form action="">
     <input id="m" autocomplete="off" /><button>Send</button>
   </form>
 </body>
+
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="//underscorejs.org/underscore-min.js"></script>
+
+
+<!--LINEメッセージテンプレート -->
+<script id="line-message-template" type="text/x-template">
+  <li>
+    <img src="<%- pictureUrl %>">
+    <p><%- displayName %>: <%- text %></p>
+  </li>
+</script>
+
+<!--フォームメッセージテンプレート -->
+<script id="form-message-template" type="text/x-template">
+  <li>
+    <p><%- displayName %>: <%- text %></p>
+  </li>
+</script>
+
 <script>
+
+  // ソケット取得
   var socket = io();
+
+  // メッセージテンプレートの取得
+  lineMessageTemplate = $('#line-message-template').html();
+  formMessageTemplate = $('#form-message-template').html();
+
+
+  // フォームからのメッセージ送信
   $('form').submit(function(){
     socket.emit('chat message', $('#m').val());
     $('#m').val('');
     return false;
   });
-  socket.on('chat message', function(msg){
+
+  // フォームからのメッセージ受信
+  socket.on('chat message', function(data){
+    var compiledHtml = _.template(formMessageTemplate);
+    $('#messages').append(compiledHtml(data));
+  });
+
+  // LINEからのメッセージ受信
+  socket.on('line message', function(data){
+    var compiledHtml = _.template(lineMessageTemplate)
+    $('#messages').append(compiledHtml(data));
+  });
+
+  // LINEからのエラー受信
+  socket.on('line error', function(msg){
     $('#messages').append($('<li>').text(msg));
   });
 </script>
