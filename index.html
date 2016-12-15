@@ -13,7 +13,7 @@
     #messages { list-style-type: none; margin: 0; padding: 0; }
     #messages li { padding: 5px 10px; }
     #messages li:nth-child(odd) { background: #eee; }
-    .pImg {border-radius:50%;}
+    .pImg {border-radius:50%;margin-bottom:4px;margin-top:4px;}
   </style>
 </head>
 
@@ -38,7 +38,7 @@
   <li>
     <div class="left-block">
       <img src="<%- pictureUrl %>" width="70" height="70" class="pImg">
-      <p><%- displayName %>: <%- text %></p>
+      <p class="ptext"><%- displayName %>: <%- text %></p>
     </div>
   </li>
 </script>
