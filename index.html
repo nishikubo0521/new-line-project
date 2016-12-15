@@ -14,8 +14,6 @@
     #messages li { padding: 5px 10px; }
     #messages li:nth-child(odd) { background: #eee; }
     .pImg {border-radius:50%;}
-    .left-block{float: left; width: 30%}
-    .right-block{float: left; width: 70%}
   </style>
 </head>
 
@@ -40,10 +38,7 @@
   <li>
     <div class="left-block">
       <img src="<%- pictureUrl %>" width="70" height="70" class="pImg">
-      <p><%- displayName %></p>
-    </div>
-    <div class="right-block">
-      : <%- text %>
+      <p><%- displayName %>: <%- text %></p>
     </div>
   </li>
 </script>
