@@ -14,6 +14,8 @@
     #messages li { padding: 5px 10px; }
     #messages li:nth-child(odd) { background: #eee; }
     .pImg {border-radius:50%;}
+    .left-block{float: left; width: 30%}
+    .right-block{float: left; width: 70%}
   </style>
 </head>
 
@@ -36,8 +38,13 @@
 <!--LINEメッセージテンプレート -->
 <script id="line-message-template" type="text/x-template">
   <li>
-    <img src="<%- pictureUrl %>" width="100" height="100" class="pImg">
-    <p><%- displayName %>: <%- text %></p>
+    <div class="left-block">
+      <img src="<%- pictureUrl %>" width="70" height="70" class="pImg">
+      <p><%- displayName %></p>
+    </div>
+    <div class="right-block">
+      : <%- text %>
+    </div>
   </li>
 </script>
 
