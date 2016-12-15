@@ -53,9 +53,8 @@
   var socket = io();
 
   // メッセージテンプレートの取得
-  lineMessageTemplate = $('#line-message-template').html();
-  formMessageTemplate = $('#form-message-template').html();
-
+  lineMessageTemplate = _.template($('#line-message-template').html());
+  formMessageTemplate = _.template($('#form-message-template').html());
 
   // フォームからのメッセージ送信
   $('form').submit(function(){
@@ -66,14 +65,17 @@
 
   // フォームからのメッセージ受信
   socket.on('chat message', function(data){
-    var compiledHtml = _.template(formMessageTemplate);
-    $('#messages').append(compiledHtml(data));
+    $('#messages').append(formMessageTemplate(data));
   });
 
   // LINEからのメッセージ受信
   socket.on('line message', function(data){
-    var compiledHtml = _.template(lineMessageTemplate)
-    $('#messages').append(compiledHtml(data));
+    image = new Image();
+    image.onload = function(){
+      console.log('image loaded');
+      $('#messages').append(lineMessageTemplate(data));
+    };
+    image.src = data.pictureUrl;
   });
 
   // LINEからのエラー受信
