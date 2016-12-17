@@ -164,8 +164,12 @@
 
   // フォームからのメッセージ受信
   socket.on('chat message', function(data){
-    $('#messages').append(formMessageTemplate(data));
-    window.scrollTo(0, $(window).height());
+    image = new Image();
+    image.onload = function(){
+      $('#messages').append(formMessageTemplate(data));
+      window.scrollTo(0, $(window).height());
+    };
+    image.src = './IMG_0180.jpg';
   });
 
   // LINEからのメッセージ受信
