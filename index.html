@@ -6,22 +6,84 @@
   <title>Socket.IO chat</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font: 13px Helvetica, Arial; }
+    body { font: 13px Helvetica, Arial;}
+    main { padding-left: 40px;padding-top: 20px; padding-bottom: 40px;}
     form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
     form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
     form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
     #messages { list-style-type: none; margin: 0; padding: 0; }
     #messages li { padding: 5px 10px; }
-    #messages li:nth-child(odd) { background: #eee; }
-    .pImg {border-radius:50%;margin-bottom:4px;margin-top:4px;}
+    /*#messages li:nth-child(odd) { background: #eee; }*/
+   /* .pImg {
+      border-radius:50%;
+      margin-bottom:4px;
+      margin-top:4px;
+      border: 5px solid darkcyan;
+    }*/
+.chat-box {
+    width: 100%;
+    height: auto;
+    overflow: hidden; /*floatの解除*/
+    margin-bottom: 20px;
+}
+.chat-face {
+    float: left;
+    margin-right: -120px;
+}
+.chat-face img{
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 4px #ddd;
+}
+.chat-area {
+    width: 100%;
+    float: right;
+}
+.chat-profile-name{
+  margin-left: 102px;
+  font-size: 20px;
+  color: gray;
+}
+.chat-hukidashi {
+    font-size: 35px;
+    display: inline-block; /*コメントの文字数に合わせて可変*/
+    padding: 15px 20px;
+    margin-left: 120px;
+    margin-top: 8px;
+    /* border: 1px solid gray; ←削除 */
+    border-radius: 10px;
+    position: relative; /*追記*/
+    background-color: #BCF5A9; /*追記*/
+}
+/* ↓追記↓ */
+.chat-hukidashi:after {
+    content: "";
+    position: absolute;
+    top: 50%; left: -10px;
+    margin-top: -10px;
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #BCF5A9 transparent transparent;
+}
+.someone {
+    background-color: #BCF5A9;
+}
+.someone:after {
+    border-color: transparent #BCF5A9 transparent transparent;
+}
   </style>
 </head>
 
 
 <body>
-  <ul id="messages">
-    
-  </ul>
+  <main>
+    <ul id="messages">
+      
+    </ul>
+  </main>
   <form action="">
     <input id="m" autocomplete="off" /><button>Send</button>
   </form>
@@ -34,19 +96,53 @@
 
 
 <!--LINEメッセージテンプレート -->
-<script id="line-message-template" type="text/x-template">
+<!-- <script id="line-message-template" type="text/x-template">
   <li>
     <div class="left-block">
       <img src="<%- pictureUrl %>" width="70" height="70" class="pImg">
       <p class="ptext"><%- displayName %>: <%- text %></p>
     </div>
   </li>
+</script> -->
+<script id="line-message-template" type="text/x-template">
+  <li>
+    <div class="chat-box">
+      <div class="chat-face">
+        <img src="<%- pictureUrl %>" alt="自分のチャット画像です。" width="90" height="90">
+      </div>
+      <div class="chat-area">
+        <p class="chat-profile-name"><%- displayName %></p>
+        <div class="chat-hukidashi">
+          <%- text %>
+        </div>
+      </div>
+    </div>
+  </li>
 </script>
 
 <!--フォームメッセージテンプレート -->
+<!-- <script id="form-message-template" type="text/x-template">
+  <li>
+    <div class="left-block">
+      <img src="./IMG_0180.jpg" width="70" height="70" class="pImg">
+      <p class="ptext"><%- displayName %>: <%- text %></p>
+    </div>
+  </li>
+</script> -->
+
 <script id="form-message-template" type="text/x-template">
   <li>
-    <p><%- displayName %>: <%- text %></p>
+    <div class="chat-box">
+      <div class="chat-face">
+        <img src="./IMG_0180.jpg" alt="自分のチャット画像です。" width="90" height="90">
+      </div>
+      <div class="chat-area">
+        <p class="chat-profile-name"><%- displayName %></p>
+        <div class="chat-hukidashi">
+          <%- text %>
+        </div>
+      </div>
+    </div>
   </li>
 </script>
 
@@ -69,14 +165,15 @@
   // フォームからのメッセージ受信
   socket.on('chat message', function(data){
     $('#messages').append(formMessageTemplate(data));
+    window.scrollTo(0, $(window).height());
   });
 
   // LINEからのメッセージ受信
   socket.on('line message', function(data){
     image = new Image();
     image.onload = function(){
-      console.log('image loaded');
       $('#messages').append(lineMessageTemplate(data));
+      window.scrollTo(0, $(window).height());
     };
     image.src = data.pictureUrl;
   });

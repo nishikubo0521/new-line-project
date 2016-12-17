@@ -84,6 +84,8 @@ app.post('/message', function(req, res){
 
 });
 
+app.use(express.static(__dirname));
+
 // socket.io to connect this server with answer view
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
