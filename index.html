@@ -20,6 +20,12 @@
       margin-top:4px;
       border: 5px solid darkcyan;
     }*/
+body  {
+    background-image: url('3185514i.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
 .chat-box {
     width: 100%;
     height: auto;
@@ -42,7 +48,7 @@
 .chat-profile-name{
   margin-left: 102px;
   font-size: 20px;
-  color: gray;
+  color: white;
 }
 .chat-hukidashi {
     font-size: 35px;
@@ -167,7 +173,7 @@
     image = new Image();
     image.onload = function(){
       $('#messages').append(formMessageTemplate(data));
-      window.scrollTo(0, $(window).height());
+      window.scrollTo(0, $(document).height());
     };
     image.src = './IMG_0180.jpg';
   });
@@ -177,7 +183,7 @@
     image = new Image();
     image.onload = function(){
       $('#messages').append(lineMessageTemplate(data));
-      window.scrollTo(0, $(window).height());
+      window.scrollTo(0, $(document).height());
     };
     image.src = data.pictureUrl;
   });
