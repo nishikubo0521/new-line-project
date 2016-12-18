@@ -2,22 +2,97 @@
 <html>
 <head>
 <style>
-body{
-	background-color: blue;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body  {
+    background-image: url('3185520i.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    color: white;
 }
 h1 {
-	color: yellow;
+	color: white;
   text-shadow: 2px 2px black;
+}
+.cap-box{
+	overflow: hidden;
+	height: auto;
+	border: 2px solid white;
+	margin:0 auto;
+	width:650px;
+}
+.left-box{
+  float: left;
+	border: 2px solid orange;
+	border-radius: 3px;
+  margin-right: -120px;
+  width:120px;
+}
+.right-box{
+  float: right;
+	border: 2px solid lightGreen;
+	width: 100%;
+	overflow: hidden;
+  padding-left: 120px;
+}
+.cap-num{
+  font-size: 20px;
+}
+.cap-name {
+  font-size: 20px;
+  display: inline;
+  float: left;
+}
+.cap-time {
+  font-size: 20px;
+  display: inline;
+  float: right;
 }
 </style>
 </head>
 <h1>全研　早押しクイズ！</h1>
 <div>
-	<div>name box</div>
+	<ul>
+
+		<li class="cap-list">
+			<div class="cap-box">
+				<div class="left-box">
+					<div class="cap-num">1</div>
+				</div>
+				<div class="right-box">
+					<div class="cap-name">西久保 直輝</div>
+					<div class="cap-time">2:23</div>
+				</div>
+			</div>
+		</li>
+
+		<li class="cap-list">
+			<div class="cap-box">
+				<div class="left-box">
+					<div class="cap-num">1</div>
+				</div>
+				<div class="right-box">
+					<div class="cap-name">西久保 直輝</div>
+					<div class="cap-time">2:23</div>
+				</div>
+			</div>
+		</li>
+		
+		<li class="cap-list">
+			<div class="cap-box">
+				<div class="left-box">
+					<div class="cap-num">1</div>
+				</div>
+				<div class="right-box">
+					<div class="cap-name">西久保 直輝</div>
+					<div class="cap-time">2:23</div>
+				</div>
+			</div>
+		</li>
+	</ul>
 </div>
 <body>
 
-<h1>西久保　直樹</h1>
 
 </body>
 </html>
