@@ -12,7 +12,7 @@
     form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
     form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
     #messages { list-style-type: none; margin: 0; padding: 0; }
-    #messages li { padding: 5px 10px; }
+    #messages li { padding: 5px 10px; margin-bottom:50px;}
     /*#messages li:nth-child(odd) { background: #eee; }*/
    /* .pImg {
       border-radius:50%;
@@ -34,7 +34,7 @@ body  {
 }
 .chat-face {
     float: left;
-    margin-right: -120px;
+    margin-right: -160px;
 }
 .chat-face img{
     border-radius: 30px;
@@ -46,15 +46,15 @@ body  {
     float: right;
 }
 .chat-profile-name{
-  margin-left: 102px;
-  font-size: 20px;
+  margin-left: 175px;
+  font-size: 45px;
   color: white;
 }
 .chat-hukidashi {
-    font-size: 35px;
+    font-size: 90px;
     display: inline-block; /*コメントの文字数に合わせて可変*/
     padding: 15px 20px;
-    margin-left: 120px;
+    margin-left: 200px;
     margin-top: 8px;
     /* border: 1px solid gray; ←削除 */
     border-radius: 10px;
@@ -114,7 +114,7 @@ body  {
   <li>
     <div class="chat-box">
       <div class="chat-face">
-        <img src="<%- pictureUrl %>" alt="自分のチャット画像です。" width="90" height="90">
+        <img src="<%- pictureUrl %>" alt="自分のチャット画像です。" width="150" height="150">
       </div>
       <div class="chat-area">
         <p class="chat-profile-name"><%- displayName %></p>
@@ -140,7 +140,7 @@ body  {
   <li>
     <div class="chat-box">
       <div class="chat-face">
-        <img src="./IMG_0180.jpg" alt="自分のチャット画像です。" width="90" height="90">
+        <img src="./IMG_0180.jpg" alt="自分のチャット画像です。" width="150" height="150">
       </div>
       <div class="chat-area">
         <p class="chat-profile-name"><%- displayName %></p>
