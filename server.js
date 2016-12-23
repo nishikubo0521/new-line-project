@@ -9,6 +9,9 @@ var async = require('async');
 var crypto = require('crypto');
 var request = require('request');
 
+// 正解の正規表現
+var reg = /変化と共生/;
+
 // port number
 var port = process.env.PORT || 3000;
 
@@ -25,6 +28,11 @@ app.use(bodyParser.json());
 // A view for all answers
 app.get('/', function(req, res){
   res.sendFile('index.html', options);
+});
+
+// A view for the result
+app.get('/result', function(req, res){
+  res.sendFile('result.html', options);
 });
 
 // A router to send answers by json post
@@ -65,6 +73,15 @@ app.post('/message', function(req, res){
 					pictureUrl: body['pictureUrl']
 				};
 				io.emit('line message', data);
+
+				// 正解した場合
+		    if(reg.test(req.body['events'][0]['message']['text'])){
+			 		winnerName = {
+						displayName : body['displayName'],
+					}; 
+		    	io.emit('result view', winnerName);
+		    }
+
 				console.log('なんかはきたよ');
 			}
 			else {
@@ -95,6 +112,14 @@ io.on('connection', function(socket){
 			text: msg,
 		};
     io.emit('chat message', data);
+
+    // 正解した場合
+    if(reg.test(msg)){
+	 		data = {
+				displayName : '正解者',
+			}; 
+    	io.emit('result view', data);
+    }
   });
 });
 
