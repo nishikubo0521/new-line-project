@@ -10,39 +10,60 @@ body  {
     background-attachment: fixed;
     background-size: 100% 100%;
     color: white;
+    padding-top: 30px;
 }
 h1 {
 	color: white;
+	font-size: 60px;
   text-shadow: 2px 2px black;
+}
+.result-box{
+	padding-top: 20px;
+}
+.cap-list{
+	margin-bottom: 12px;
 }
 .cap-box{
 	overflow: hidden;
 	height: auto;
-	border: 2px solid white;
+	border: 3px solid white;
 	margin:0 auto;
-	width:650px;
+	width:750px;
+	height: 60px;
+	border-radius: 10px;
 }
 .left-box{
   float: left;
-	border: 2px solid orange;
-	border-radius: 3px;
+	/*border: 2px solid orange;*/
+	/*border-radius: 3px;*/
   margin-right: -120px;
   width:120px;
+  height: 100%;
+  border-right: 3px solid white;
 }
 .right-box{
   float: right;
-	border: 2px solid lightGreen;
+	/*border: 2px solid lightGreen;*/
 	width: 100%;
 	overflow: hidden;
   padding-left: 120px;
 }
 .cap-num{
-  font-size: 20px;
+  font-size: 42px;
+  text-align: center;
+}
+.cap-num span{	font-family: arial, sans-serif;
+	font-size: 33px;
 }
 .cap-name {
-  font-size: 20px;
+/*font-family: 'Lucida Grande', Verdana, Arial, 'Hiragino Kaku Gothic Pro', Meiryo, 'メイリオ', sans-serif;*/
+	font-family: arial, sans-serif;
+  font-size: 33px;
+  /*font-weight: bold;*/
   display: inline;
   float: left;
+  text-align: center;
+  padding-left: 30px; 
 }
 .cap-time {
   font-size: 20px;
@@ -57,10 +78,69 @@ h1 {
 </head>
 
 <body>
-<h1 class="quiz-title">全研　早押しクイズ 正解者一覧！</h1>
-<div>
+<h1 class="quiz-title">早押しクイズ 正解者一覧</h1>
+<div class="result-box">
 	<ul id="result">
-
+		<li class="cap-list">
+			<div class="cap-box">
+				<div class="left-box">
+					<div class="cap-num">2<span>位</span></div>
+				</div>
+				<div class="right-box">
+					<div class="cap-name">西久保　直輝</div>
+				</div>
+			</div>
+		</li>		
+		<li class="cap-list">
+			<div class="cap-box">
+				<div class="left-box">
+					<div class="cap-num">2<span>位</span></div>
+				</div>
+				<div class="right-box">
+					<div class="cap-name">安藤　テル</div>
+				</div>
+			</div>
+		</li>
+		<li class="cap-list">
+			<div class="cap-box">
+				<div class="left-box">
+					<div class="cap-num">2<span>位</span></div>
+				</div>
+				<div class="right-box">
+					<div class="cap-name">正解者</div>
+				</div>
+			</div>
+		</li>
+				<li class="cap-list">
+			<div class="cap-box">
+				<div class="left-box">
+					<div class="cap-num">2<span>位</span></div>
+				</div>
+				<div class="right-box">
+					<div class="cap-name">正解者</div>
+				</div>
+			</div>
+		</li>
+				<li class="cap-list">
+			<div class="cap-box">
+				<div class="left-box">
+					<div class="cap-num">2<span>位</span></div>
+				</div>
+				<div class="right-box">
+					<div class="cap-name">マイケル　クリストファー</div>
+				</div>
+			</div>
+		</li>
+				<li class="cap-list">
+			<div class="cap-box">
+				<div class="left-box">
+					<div class="cap-num">2<span>位</span></div>
+				</div>
+				<div class="right-box">
+					<div class="cap-name">正解者</div>
+				</div>
+			</div>
+		</li>
 	</ul>
 </div>
 </body>
@@ -93,7 +173,9 @@ h1 {
 
   socket.on('result view', function(data){
   	data.number = winNumber;
-   	$('#result').append(resultListTemplate(data));
+  	if(winNumber <= 6){
+	   	$('#result').append(resultListTemplate(data));
+  	}
    	winNumber ++;
   });
 

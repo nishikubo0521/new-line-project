@@ -90,11 +90,12 @@ body  {
       
     </ul>
   </main>
-  <form action="">
-    <input id="m" autocomplete="off" /><button>Send</button>
-  </form>
 </body>
-
+<!--   
+<form action="">
+  <input id="m" autocomplete="off" /><button>Send</button>
+</form> 
+-->
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -102,14 +103,6 @@ body  {
 
 
 <!--LINEメッセージテンプレート -->
-<!-- <script id="line-message-template" type="text/x-template">
-  <li>
-    <div class="left-block">
-      <img src="<%- pictureUrl %>" width="70" height="70" class="pImg">
-      <p class="ptext"><%- displayName %>: <%- text %></p>
-    </div>
-  </li>
-</script> -->
 <script id="line-message-template" type="text/x-template">
   <li>
     <div class="chat-box">
@@ -126,57 +119,13 @@ body  {
   </li>
 </script>
 
-<!--フォームメッセージテンプレート -->
-<!-- <script id="form-message-template" type="text/x-template">
-  <li>
-    <div class="left-block">
-      <img src="./IMG_0180.jpg" width="70" height="70" class="pImg">
-      <p class="ptext"><%- displayName %>: <%- text %></p>
-    </div>
-  </li>
-</script> -->
-
-<script id="form-message-template" type="text/x-template">
-  <li>
-    <div class="chat-box">
-      <div class="chat-face">
-        <img src="./IMG_0180.jpg" alt="自分のチャット画像です。" width="150" height="150">
-      </div>
-      <div class="chat-area">
-        <p class="chat-profile-name"><%- displayName %></p>
-        <div class="chat-hukidashi">
-          <%- text %>
-        </div>
-      </div>
-    </div>
-  </li>
-</script>
-
 <script>
 
   // ソケット取得
   var socket = io();
 
-  // メッセージテンプレートの取得
+  // LINEメッセージテンプレートの取得
   lineMessageTemplate = _.template($('#line-message-template').html());
-  formMessageTemplate = _.template($('#form-message-template').html());
-
-  // フォームからのメッセージ送信
-  $('form').submit(function(){
-    socket.emit('chat message', $('#m').val());
-    $('#m').val('');
-    return false;
-  });
-
-  // フォームからのメッセージ受信
-  socket.on('chat message', function(data){
-    image = new Image();
-    image.onload = function(){
-      $('#messages').append(formMessageTemplate(data));
-      window.scrollTo(0, $(document).height());
-    };
-    image.src = './IMG_0180.jpg';
-  });
 
   // LINEからのメッセージ受信
   socket.on('line message', function(data){
@@ -192,5 +141,43 @@ body  {
   socket.on('line error', function(msg){
     $('#messages').append($('<li>').text(msg));
   });
+
+</script>
+<!-- <script id="form-message-template" type="text/x-template">
+<li>
+  <div class="chat-box">
+    <div class="chat-face">
+      <img src="./IMG_0180.jpg" alt="自分のチャット画像です。" width="150" height="150">
+    </div>
+    <div class="chat-area">
+      <p class="chat-profile-name"><%- displayName %></p>
+      <div class="chat-hukidashi">
+        <%- text %>
+      </div>
+    </div>
+  </div>
+</li>
+</script> -->
+<script>
+  // フォームメッセージテンプレートの取得
+  // formMessageTemplate = _.template($('#form-message-template').html());
+
+  // フォームからのメッセージ送信
+  // $('form').submit(function(){
+  //   socket.emit('chat message', $('#m').val());
+  //   $('#m').val('');
+  //   return false;
+  // });
+
+  // フォームからのメッセージ受信
+  // socket.on('chat message', function(data){
+  //   image = new Image();
+  //   image.onload = function(){
+  //     $('#messages').append(formMessageTemplate(data));
+  //     window.scrollTo(0, $(document).height());
+  //   };
+  //   image.src = './IMG_0180.jpg';
+  // });
+
 </script>
 </html>
