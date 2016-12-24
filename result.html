@@ -69,11 +69,10 @@ h1 {
 		<li class="cap-list">
 			<div class="cap-box">
 				<div class="left-box">
-					<div class="cap-num">1</div>
+					<div class="cap-num"><%- number %></div>
 				</div>
 				<div class="right-box">
 					<div class="cap-name"><%- displayName %></div>
-					<div class="cap-time">2:23</div>
 				</div>
 			</div>
 		</li>
@@ -86,11 +85,16 @@ h1 {
   // ソケット取得
   var socket = io();
 
+  // 正解者No.
+  var winNumber = 1;
+
   // メッセージテンプレートの取得  
   resultListTemplate = _.template($('#result-list-template').html());
 
   socket.on('result view', function(data){
+  	data.number = winNumber;
    	$('#result').append(resultListTemplate(data));
+   	winNumber ++;
   });
 
 </script>
